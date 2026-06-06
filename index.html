@@ -3,170 +3,365 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FREE 6 DAYS TRAINING</title>
+  <title>Free 6-Day Video Editing & Animation Training</title>
 
-  <!-- Orbitron font -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome for arrow icon -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
+    :root {
+      --red: #C8000A;
+      --red-deep: #8B0000;
+      --red-glow: rgba(200, 0, 10, 0.35);
+      --cream: #FFF8F0;
+      --black: #0D0D0D;
+      --muted: #888;
+    }
+
     * {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       box-sizing: border-box;
-      font-family: 'Orbitron', sans-serif;
     }
 
     body {
-      background: #fff;
-      color: #b30000;
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* ── HERO SECTION ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      padding: 2rem;
+      padding: 5rem 1.5rem 4rem;
       text-align: center;
+      overflow: hidden;
     }
 
-    .container {
+    /* Red radial glow behind hero */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(200,0,10,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Diagonal accent line */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: linear-gradient(90deg, transparent, var(--red), transparent);
+    }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(200,0,10,0.12);
+      border: 1px solid rgba(200,0,10,0.4);
+      color: #ff5555;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 2.2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .badge .dot {
+      width: 7px; height: 7px;
+      background: #ff4444;
+      border-radius: 50%;
+      animation: pulse 1.4s infinite;
+    }
+
+    /* ── MAIN HEADLINE ── */
+    .headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.2rem, 9vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    .headline span {
+      color: var(--red);
+      display: block;
+    }
+
+    .subhead {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      color: rgba(255,248,240,0.45);
+      letter-spacing: 0.08em;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    /* ── DESCRIPTOR ── */
+    .descriptor {
       max-width: 480px;
-      background: #fff;
-      border-radius: 20px;
-      padding: 2.5rem 2rem;
-      box-shadow: 0 0 30px rgba(179, 0, 0, 0.15);
-      animation: fadeIn 0.8s ease;
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,248,240,0.6);
+      line-height: 1.7;
+      margin-bottom: 2.8rem;
+      animation: fadeUp 0.7s 0.3s ease both;
     }
 
-    h1 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      color: #b30000;
+    /* ── PILLS ROW ── */
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.7s 0.4s ease both;
     }
 
-    h2 {
-      font-size: 1.1rem;
-      margin-bottom: 1.2rem;
-      color: #d00000;
+    .pill {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,248,240,0.75);
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.45rem 0.9rem;
+      border-radius: 50px;
     }
 
-    p {
-      font-size: 0.95rem;
-      color: #444;
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
+    .pill i { color: var(--red); font-size: 0.75rem; }
+
+    /* ── SPOTS WARNING ── */
+    .spots {
+      background: rgba(200,0,10,0.1);
+      border: 1px solid rgba(200,0,10,0.3);
+      border-radius: 10px;
+      padding: 0.7rem 1.4rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #ff6666;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 2.2rem;
+      animation: fadeUp 0.7s 0.5s ease both;
     }
 
-    .highlight {
-      background: #ffe5e5;
-      border: 1px solid #ff9999;
-      color: #b30000;
-      padding: 0.7rem 1rem;
-      border-radius: 8px;
-      display: inline-block;
-      margin-bottom: 1.5rem;
-      font-weight: 700;
+    /* ── CTA BUTTON ── */
+    .cta-wrap {
+      animation: fadeUp 0.7s 0.6s ease both;
     }
 
-    .arrow {
-      font-size: 2rem;
-      color: #b30000;
-      margin: 1rem 0;
-      animation: bounce 1.5s infinite;
-    }
-
-    /* BIG CTA BUTTON */
-    .btn {
-      background: #b30000;
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: var(--red);
       color: #fff;
-      padding: 1.4rem 2.5rem;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-      font-size: 1.3rem;
-      font-weight: 800;
-      letter-spacing: 1px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       text-decoration: none;
-      display: inline-block;
-      animation: shake 1.5s infinite ease-in-out;
-      box-shadow: 0 0 25px rgba(179, 0, 0, 0.4);
-      transition: all 0.3s ease;
+      padding: 1.1rem 2.6rem;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 40px var(--red-glow), 0 4px 20px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 40px rgba(179, 0, 0, 0.6);
+    .cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+      pointer-events: none;
     }
 
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 60px var(--red-glow), 0 8px 30px rgba(0,0,0,0.5);
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+    .cta i { font-size: 1.1rem; }
+
+    .cta-note {
+      margin-top: 0.9rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
     }
 
-    @keyframes shake {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(2deg); }
-      50% { transform: rotate(-2deg); }
-      75% { transform: rotate(2deg); }
+    /* ── FEATURES STRIP ── */
+    .features {
+      width: 100%;
+      max-width: 720px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: 5rem;
+      animation: fadeUp 0.7s 0.7s ease both;
     }
 
-    footer {
-      margin-top: 2rem;
+    .feature {
+      padding: 1.6rem 1rem;
+      text-align: center;
+      background: var(--black);
+    }
+
+    .feature-icon {
+      font-size: 1.4rem;
+      color: var(--red);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .feature-title {
       font-size: 0.8rem;
-      color: #999;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 0.2rem;
     }
 
-    @media (max-width: 600px) {
-      h1 { font-size: 1.4rem; }
-      .btn { font-size: 1.1rem; padding: 1.2rem 2rem; }
+    .feature-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 520px) {
+      .features { grid-template-columns: 1fr; }
+      .feature { border-bottom: 1px solid rgba(255,255,255,0.06); }
     }
   </style>
 
-
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1054586146925058');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1054586146925058&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','1054586146925058');fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1054586146925058&ev=PageView&noscript=1"/></noscript>
 </head>
 
 <body>
-  <div class="container">
-    <h1>FREE 6 DAYS VIDEO EDITING & ANIMATING TRAINING</h1>
-    <h2>Limited Spots Available</h2>
 
-    <p class="highlight">All You Need is Your Smartphone & Data Connection</p>
+  <section class="hero">
 
-    <div class="arrow">
-      <i class="fa-solid fa-angles-down"></i>
+    <div class="badge">
+      <span class="dot"></span>
+      Free Enrollment — Limited Spots
     </div>
 
-    <p><strong>Click the big red button below to join for FREE now</strong></p>
+    <h1 class="headline">
+      6-Day
+      <span>Video Editing</span>
+      Training
+    </h1>
+    <p class="subhead">& Animation Masterclass</p>
 
-    <a href="https://chat.whatsapp.com/HOdoBNEU0juK0HWu25cDuX?mode=gi_t="btn">
-      CLICK HERE TO JOIN NOW
-    </a>
-  </div>
+    <p class="descriptor">
+      Learn professional video editing and animation from scratch — completely free.
+      All you need is your <strong style="color:var(--cream)">smartphone</strong> and a data connection.
+    </p>
+
+    <div class="pills">
+      <span class="pill"><i class="fa-solid fa-mobile-screen"></i> Smartphone Only</span>
+      <span class="pill"><i class="fa-solid fa-wifi"></i> Needs Data</span>
+      <span class="pill"><i class="fa-solid fa-circle-check"></i> 100% Free</span>
+      <span class="pill"><i class="fa-solid fa-video"></i> Video Format</span>
+    </div>
+
+    <div class="spots">⚠ &nbsp;Limited spots — act fast before they fill up</div>
+
+    <div class="cta-wrap">
+      <a href="https://chat.whatsapp.com/HOdoBNEU0juK0HWu25cDuX" class="cta" target="_blank" rel="noopener">
+        <i class="fa-brands fa-whatsapp"></i>
+        Join the Free Training Now
+      </a>
+      <p class="cta-note">Tap to join the WhatsApp group instantly &rarr;</p>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <span class="feature-icon"><i class="fa-solid fa-calendar-days"></i></span>
+        <p class="feature-title">6 Days</p>
+        <p class="feature-sub">Structured daily lessons</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon"><i class="fa-solid fa-film"></i></span>
+        <p class="feature-title">Video + Animation</p>
+        <p class="feature-sub">Editing & motion graphics</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon"><i class="fa-solid fa-trophy"></i></span>
+        <p class="feature-title">Beginner Friendly</p>
+        <p class="feature-sub">Zero experience needed</p>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    &copy; <script>document.write(new Date().getFullYear())</script> — Free Video Editing Training &nbsp;·&nbsp; All Rights Reserved
+  </footer>
 
 </body>
 </html>
